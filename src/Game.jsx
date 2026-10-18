@@ -9,11 +9,13 @@ export default function Game({setReady, elapsed, setElapsed}) {
     const [dice, setDice] = useState(() => generateAll())
     const gameWon = dice.every(die => die.isHeld) && dice.every(die => die.value === dice[0].value)
 
-    if(gameWon) {
-        console.log("done")
-        setRunning(false)
-        setReady(2)
-    }
+    useEffect(() => {
+        if(gameWon) {
+            console.log("done")
+            setRunning(false)
+            setReady(2)
+        }
+    }, [gameWon])
 
     function generateAll(){
         let newDice = []
